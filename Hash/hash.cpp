@@ -31,7 +31,7 @@ void list::insertEnd(int textToInsert) {//insert given text at the end of the do
 		temp->next = temp3;
 	}
 }
-void modXchain(list* stuff,int size) {
+void modXchain(list* stuff, int size) {
 	int numCollisions = 0;
 	int key = 0;
 	int temp = 0;
@@ -62,7 +62,7 @@ void modXchain(list* stuff,int size) {
 	loadFactor = 0;
 	cout << endl;
 }
-void modXopen(int* stuff,int size) {
+void modXopen(int* stuff, int size) {
 	int numCollisions = 0;
 	int key = 0;
 	int temp = 0;
@@ -97,19 +97,19 @@ void modXopen(int* stuff,int size) {
 			}
 		}
 		loadFactor = load / size;
-		if (static_cast<int>(load)%(size/10) == 0) {//This happens when load factor is the multiple of 0.1
+		if (static_cast<int>(load) % (size / 10) == 0) {//This happens when load factor is the multiple of 0.1
 			cout << "Number of collisions when loadFactor = ";
 			cout << loadFactor;
-			cout<< " for modXopen of size " << size << ": " << numCollisions << endl;
-			if(loadFactor!=1)
-			cout << "c = " << (1 + 1 / (1 - loadFactor)) / 2 << endl;
+			cout << " for modXopen of size " << size << ": " << numCollisions << endl;
+			if (loadFactor != 1)
+				cout << "c = " << (1 + 1 / (1 - loadFactor)) / 2 << endl;
 		}
 	}
 	cout << endl;
 	loadFactor = 0;
-	cout <<endl;
+	cout << endl;
 }
-void midSXchain(list* stuff,int size) {
+void midSXchain(list* stuff, int size) {
 	int numCollisions = 0;
 	int key = 0;
 	int temp = 0;
@@ -148,7 +148,7 @@ void midSXchain(list* stuff,int size) {
 	loadFactor = 0;
 	cout << endl;
 }
-void midSXopen(int* stuff,int size) {
+void midSXopen(int* stuff, int size) {
 	int numCollisions = 0;
 	int key = 0;
 	int temp = 0;
@@ -157,9 +157,9 @@ void midSXopen(int* stuff,int size) {
 	string tempString = "";
 	while (loadFactor != 1) {
 		key = rand() % (3 * size);
-		temp = key*key;//square the key
+		temp = key * key;//square the key
 		tempString = to_string(temp);
-		if(tempString.length() < 2 * to_string(key).length()){
+		if (tempString.length() < 2 * to_string(key).length()) {
 			tempString = '0' + tempString;//add a 0 to the beginning of the string if the square's digits are less than twice of the seed's
 		}
 		tempString = tempString.substr((tempString.length() - to_string(key).length()) / 2, to_string(key).length());//get the digits in the middle
@@ -196,7 +196,7 @@ void midSXopen(int* stuff,int size) {
 			cout << loadFactor;
 			cout << " for midSXopen of size " << size << ": " << numCollisions << endl;
 			if (loadFactor != 1)
-			cout << "c = " << (1 + 1 / (1 - loadFactor)) / 2 << endl;
+				cout << "c = " << (1 + 1 / (1 - loadFactor)) / 2 << endl;
 		}
 	}
 	cout << endl;
@@ -222,7 +222,7 @@ int main() {
 	//1 is rand gen X chaining
 	//2 is rand gen X open add
 	//3 is mid square X chaining
-	// 4 is mid square X open add
+	//4 is mid square X open add
 	cout << "input" << endl;
 	cin >> choice;
 	switch (choice) {
@@ -293,15 +293,6 @@ int main() {
 	}
 	}
 
-
-
-
-	delete size100;
-	delete size50;
-	delete size10;
-	delete sIze100;
-	delete sIze50;
-	delete sIze10;
 	system("pause");
 	return 0;
 }
