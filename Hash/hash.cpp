@@ -40,21 +40,12 @@ void modXchain(list* stuff,int size) {
 	while (loadFactor != 1) {
 		key = rand() % (3 * size);
 		temp = key % size;
-		if (stuff[temp].isEmpty()) {
-			/*node *someNode = new node;
-			someNode->value = key;
-			stuff[temp] = someNode;*/
+		if (stuff[temp].isEmpty()) {//check if there are no nodes in the current list
 			load++;
 			stuff[temp].insertEnd(key);
 		}
-		else {
+		else {//if yes, then add 1 to the # collisions and add the key to the end
 			numCollisions++;
-			/*node* aNode = stuff[temp];
-			while (aNode->next!= NULL) {
-				aNode = aNode->next;
-			}
-			stuff[temp]->next = aNode;
-			aNode->value = key;*/
 			stuff[temp].insertEnd(key);
 			load++;
 		}
@@ -114,7 +105,6 @@ void modXopen(int* stuff,int size) {
 			cout << "c = " << (1 + 1 / (1 - loadFactor)) / 2 << endl;
 		}
 	}
-	//cout << "c = " << (1 + 1 / (1 - loadFactor)) / 2 << endl;
 	cout << endl;
 	loadFactor = 0;
 	cout <<endl;
@@ -135,22 +125,13 @@ void midSXchain(list* stuff,int size) {
 		}
 		tempString = tempString.substr((tempString.length() - to_string(key).length()) / 2, to_string(key).length());//get the digits in the middle
 		temp = stoi(tempString);//get the value after mid square
-		temp = temp % size;
+		temp = temp % size;//mod the size
 		if (stuff[temp].isEmpty()) {
-			/*node *someNode = new node;
-			someNode = stuff[temp];
-			someNode->value = key;*/
 			stuff[temp].insertEnd(key);
 			load++;
 		}
 		else {
 			numCollisions++;
-			/*node* aNode = stuff[temp];
-			while (aNode != nullptr) {
-				aNode = aNode->next;
-			}
-			stuff[temp]->next = aNode;
-			aNode->value = key;*/
 			stuff[temp].insertEnd(key);
 			load++;
 		}
@@ -183,7 +164,7 @@ void midSXopen(int* stuff,int size) {
 		}
 		tempString = tempString.substr((tempString.length() - to_string(key).length()) / 2, to_string(key).length());//get the digits in the middle
 		temp = stoi(tempString);//get the value after mid square
-		temp = temp % size;
+		temp = temp % size;//mod the size
 		if (stuff[temp] == -1) {
 			stuff[temp] = key;
 			load++;
@@ -233,39 +214,81 @@ int main() {
 	int * size10 = new int[10];
 	fill_n(size10, 10, -1);
 
-	/*node** sIze100 = new node*[100];
-	fill_n(sIze100, 100, nullptr);
-	node** sIze50 = new node*[50];
-	fill_n(sIze50, 50, nullptr);
-	node** sIze10 = new node*[10];
-	fill_n(sIze10, 10, nullptr);*/
 	list* sIze100 = new list[100];
 	list* sIze50 = new list[50];
 	list* sIze10 = new list[10];
 
 	int choice;
+	//1 is rand gen X chaining
+	//2 is rand gen X open add
+	//3 is mid square X chaining
+	// 4 is mid square X open add
 	cout << "input" << endl;
 	cin >> choice;
 	switch (choice) {
 	case 1: {
-			modXchain(sIze100, 100);
-			modXchain(sIze50, 50);
-			modXchain(sIze10, 10);
-			break;
+		list* sIze100 = new list[100];
+		list* sIze50 = new list[50];
+		list* sIze10 = new list[10];
+
+		modXchain(sIze100, 100);
+		modXchain(sIze50, 50);
+		modXchain(sIze10, 10);
+
+		delete sIze100;
+		delete sIze50;
+		delete sIze10;
+
+		break;
 	}case 2: {
+
+		int * size100 = new int[100];
+		fill_n(size100, 100, -1);//-1 is the initial value so that whether an array element is "empty" can be identified
+		int * size50 = new int[50];
+		fill_n(size50, 50, -1);
+		int * size10 = new int[10];
+		fill_n(size10, 10, -1);
+
 		modXopen(size100, 100);
 		modXopen(size50, 50);
 		modXopen(size10, 10);
+
+		delete size100;
+		delete size50;
+		delete size10;
+
 		break;
 	}case 3: {
+		list* sIze100 = new list[100];
+		list* sIze50 = new list[50];
+		list* sIze10 = new list[10];
+
 		midSXchain(sIze100, 100);
 		midSXchain(sIze50, 50);
 		midSXchain(sIze10, 10);
+
+		delete sIze100;
+		delete sIze50;
+		delete sIze10;
+
 		break;
 	}case 4: {
+
+		int * size100 = new int[100];
+		fill_n(size100, 100, -1);//-1 is the initial value so that whether an array element is "empty" can be identified
+		int * size50 = new int[50];
+		fill_n(size50, 50, -1);
+		int * size10 = new int[10];
+		fill_n(size10, 10, -1);
+
 		midSXopen(size100, 100);
 		midSXopen(size50, 50);
 		midSXopen(size10, 10);
+
+		delete size100;
+		delete size50;
+		delete size10;
+
 		break;
 	}
 	}
